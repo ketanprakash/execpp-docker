@@ -19,7 +19,7 @@ export const handler = async (event) => {
 
   try {
     const fileName = await generateFileName();
-    const { code, input = "" } = event;
+    const { code, input = "" } = JSON.parse(event["body"]);
 
     const codePath = path.join(tmpDir, fileName + ".cpp");
     const inputPath = path.join(tmpDir, fileName + ".txt");
@@ -44,15 +44,23 @@ export const handler = async (event) => {
     await fs.unlink(codePath);
     await fs.unlink(inputPath);
     const response = {
-      data: output, 
-      status: true,
+      statusCode: 200,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      isBase64Encoded: false,
+      body: JSON.stringify({ data: output, status: true }),
     };
 
     return response;
   } catch (err) {
     const response = {
-      data: `${err.message}`,
-      status: false
+      statusCode: 500,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      isBase64Encoded: false,
+      body: JSON.stringify({ data: `${err.message}`, status: false }),
     };
 
     return response;
