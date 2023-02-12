@@ -13,7 +13,7 @@ export const handler = async (event) => {
   // const eventBody = JSON.parse(event["body"]);
   const response = {
       statusCode: 200,
-      code: JSON.parse(event["body"]).code,
+      code: event["body"],
   }
 
   return response;
