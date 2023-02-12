@@ -9,11 +9,11 @@ const execAsync = util.promisify(exec);
 
 export const handler = async (event) => {
   // TODO implement
-
-  const eventBody = JSON.parse(event["body"]);
+  const whatis = typeof event;
+  // const eventBody = JSON.parse(event["body"]);
   const response = {
       statusCode: 200,
-      code: JSON.stringify(eventBody)
+      code: whatis
   }
 
   return response;
