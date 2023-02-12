@@ -11,8 +11,12 @@ export const handler = async (event) => {
   // TODO implement
   // const whatis = typeof event;
   const response = {
-    statusCode: 200,
-    body: { code: JSON.stringify(event) },
+    statusCode: 500,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    isBase64Encoded: false,
+    body: JSON.stringify(event),
   };
 
   return response;
