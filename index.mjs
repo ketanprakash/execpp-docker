@@ -10,9 +10,10 @@ const execAsync = util.promisify(exec);
 export const handler = async (event) => {
   // TODO implement
 
+  const eventBody = JSON.parse(event["body"]);
   const response = {
       statusCode: 200,
-      code: JSON.stringify(event["body"])
+      code: JSON.stringify(eventBody)
   }
 
   return response;
