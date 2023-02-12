@@ -44,23 +44,15 @@ export const handler = async (event) => {
     await fs.unlink(codePath);
     await fs.unlink(inputPath);
     const response = {
-      statusCode: 200,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      isBase64Encoded: false,
-      body: JSON.stringify({ data: output, status: true }),
+      data: output, 
+      status: true,
     };
 
     return response;
   } catch (err) {
     const response = {
-      statusCode: 500,
-      headers: {
-        "Content-Type": "application/json",
-      },
-      isBase64Encoded: false,
-      body: JSON.stringify({ data: `${err.message}`, status: false }),
+      data: `${err.message}`,
+      status: false
     };
 
     return response;
