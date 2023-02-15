@@ -32,13 +32,15 @@ export const handler = async (event) => {
       if (err) throw err;
     });
 
+    const startTime = new Date().getTime();
     await execAsync(`g++ ${codePath} -o ${exePath}`);
     const { error, stdout, stderr } = await execAsync(
       `${exePath} < ${inputPath}`
     ).catch((error) => {
       throw error;
     });
-
+    const endTime = new Date().getTime();
+    const executionTime = endTime - startTime;
     const output = error || stderr || stdout;
     await fs.unlink(codePath);
     await fs.unlink(inputPath);
