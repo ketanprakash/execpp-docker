@@ -32,10 +32,11 @@ export const handler = async (event) => {
       if (err) throw err;
     });
 
-    const startTime = new Date().getTime();
     await execAsync(`g++ ${codePath} -o ${exePath}`);
+    const startTime = new Date().getTime();
     const { error, stdout, stderr } = await execAsync(
-      `${exePath} < ${inputPath}`
+      `${exePath} < ${inputPath}`,
+      { timeout: 4000 }
     ).catch((error) => {
       throw error;
     });
